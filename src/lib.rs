@@ -11,7 +11,11 @@ impl Rectangle {
 }
 
 pub fn add_two(a: i32) -> i32 {
-    a + 2
+    internal_adder(a, 2)
+}
+
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
 }
 
 // custom messages for failures
@@ -50,16 +54,16 @@ impl Guess {
 #[cfg(test)]
 mod tests {
     use super::*;
-    #[test]
-    fn it_works() -> Result<(), String> {
-        // writing tests that return Result<T, E> is convenient because it enables the use of the ? operator, letting tests fail if any operation within them returns an Err variant
-        // cant use #[should_panic] with tests that use Result<T, E>. instead, return Err value
-        if 2 + 2 == 5 {
-            Ok(())
-        } else {
-            Err(String::from("two plus two does not equal five 🤡"))
-        }
-    }
+    // #[test]
+    // fn it_works() -> Result<(), String> {
+    //     // writing tests that return Result<T, E> is convenient because it enables the use of the ? operator, letting tests fail if any operation within them returns an Err variant
+    //     // cant use #[should_panic] with tests that use Result<T, E>. instead, return Err value
+    //     if 2 + 2 == 5 {
+    //         Ok(())
+    //     } else {
+    //         Err(String::from("two plus two does not equal five 🤡"))
+    //     }
+    // }
 
     #[test]
     fn larger_can_hold_smaller() {
@@ -135,15 +139,20 @@ mod tests {
         assert_eq!(10, value);
     }
 
-    #[test]
-    fn this_test_will_fail() {
-        let value = prints_and_returns_10(11);
-        assert_eq!(value, 9);
-    }
+    // #[test]
+    // fn this_test_will_fail() {
+    //     let value = prints_and_returns_10(11);
+    //     assert_eq!(value, 9);
+    // }
 
     #[test]
     #[ignore]
     fn expensive_test() {
         // long running code
+    }
+
+    #[test]
+    fn internal() {
+        assert_eq!(4, internal_adder(2, 2));
     }
 }
