@@ -24,6 +24,11 @@ pub struct Guess {
     value: i32,
 }
 
+pub fn prints_and_returns_10(a: i32) -> i32 {
+    println!("I got the value: {}", a);
+    10
+}
+
 impl Guess {
     pub fn new(value: i32) -> Guess {
         if value < 1 {
@@ -93,6 +98,11 @@ mod tests {
     }
 
     #[test]
+    fn adds_two_to_100() {
+        assert_eq!(102, add_two(100));
+    }
+
+    #[test]
     fn greeting_contains_name() {
         let result = greeting("Jesse");
         assert!(
@@ -117,4 +127,23 @@ mod tests {
     // fn another() {
     //     panic!("Make this test fail");
     // }
+
+    // run with cargo test -- --show-output so messages sent to stdout are not captured
+    #[test]
+    fn this_test_will_pass() {
+        let value = prints_and_returns_10(1);
+        assert_eq!(10, value);
+    }
+
+    #[test]
+    fn this_test_will_fail() {
+        let value = prints_and_returns_10(11);
+        assert_eq!(value, 9);
+    }
+
+    #[test]
+    #[ignore]
+    fn expensive_test() {
+        // long running code
+    }
 }
